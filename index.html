@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Matthew Gigante — Portfolio</title>
+  <meta name="description" content="Portfolio of Matthew Gigante — Game Developer / Gameplay Programmer" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#000;        /* solid black background */
+      --card:#000;      /* all cards black */
+      --muted:#888;     /* muted text for readability */
+      --accent:#00e676; /* green accent */
+      --radius:16px;
+      --max-width:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: var(--bg);
+      color:#e6eef0;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+    /* Header / nav */
+    header {
+      position: static; /* scrolls normally */
+      display: flex;
+      align-items: center;
+      width: 20%; /* half the page width */
+      padding: 5px;
+      border-radius: 12px;
+      border: 1px solid #111;
+      background: #000; /* black top bar */
+    }
+    .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+    .brand .logo{
+      width:44px;height:44px;border-radius:10px;
+      background:#000;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#fff;
+    }
+    .brand div {
+      display: flex;
+      flex-direction: column;  /* stack the h1 and job title */
+      justify-content: center; /* vertically center the text within its own box */
+      text-align: left;        /* keep text left-aligned */
+    }
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    nav a:hover{color:var(--accent);background:#111}
+    .cta{background:#000; color:var(--accent); padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    .hamburger{display:none;background:none;border:0;color:var(--muted);font-size:22px}
+    @media (max-width:850px){
+      nav{display:none}
+      .hamburger{display:inline-flex}
+    }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:56px 0}
+    .hero .intro h2{color:var(--accent);margin:0 0 6px}
+    .hero h1{font-size:32px;margin:2px 0 12px}
+    .lead{color:var(--muted);max-width:720px}
+
+    .card, .resume-card, .contact-card, .profile-photo{
+      background: var(--card);
+      border:1px solid #111;
+      border-radius:14px;
+    }
+    .profile-photo{height:360px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+
+    /* Sections */
+    section{padding:46px 0}
+    section h3{color:var(--accent);margin:0 0 8px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{padding:16px;transition:transform .28s ease,box-shadow .28s ease;opacity:0;transform:translateY(14px);}
+    .card.visible{opacity:1;transform:none}
+    .card:hover{transform:translateY(-6px);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .card img{width:100%;height:170px;object-fit:cover;border-radius:8px}
+    .card h4{margin:10px 0 6px}
+    .card p{color:var(--muted);font-size:14px;margin:0}
+    .links{display:flex;gap:8px;margin-top:10px}
+    .links a{font-weight:700;padding:8px 10px;border-radius:8px;background:#111;color:var(--muted);text-decoration:none}
+    .links a.primary{background:#000;color:var(--accent)}
+
+    .resume-card{display:flex;gap:18px;align-items:center;padding:20px;border-radius:12px}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .contact-card{padding:18px;border-radius:12px}
+
+    footer{padding:40px 0;color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr 340px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:720px){
+      .wrap{padding:18px}
+      .hero{grid-template-columns:1fr;gap:20px}
+      .profile-photo{height:280px}
+      .cards{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+    }
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+    .center{display:flex;align-items:center;justify-content:center}
+    .accent-underline{display:inline-block;padding-bottom:6px;position:relative}
+    .accent-underline:after{content:'';position:absolute;left:0;right:0;height:6px;bottom:0;border-radius:6px;background:var(--accent);opacity:0.2;pointer-events:none}
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <div>
+        <div>
+          <h1 style="font-size:20px;margin:0">Matthew Gigante</h1>
+          <div style="font-size:14px;line-height:1.2;">Gameplay Programmer<br> Game Developer</div>
+        </div>
+      </div>
+
+
+      <button class="hamburger" aria-label="Open menu" id="menuBtn">☰</button>
+    </header>
+
+    <div id="mobileNav" style="display:none;margin:10px 12px 0;padding:12px;border-radius:12px;background:#000;border:1px solid #111"></div>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="intro">
+          <h2>This is <span class="accent-underline">Matthew Gigante</span></h2>
+          <h1>Game Developer focused on systems, networking, and gameplay feel.</h1>
+          <p class="lead">I build games, tools and prototypes with an emphasis on clean code, robust systems, and fun player interactions. I work mainly with Unity, C#, and real‑time networking. Below are some highlights from my recent work.</p>
+        </div>
+
+        <aside class="profile-card">
+          <img src="assets/IMG_2024_JPG.jpg" alt="TumbleTrash screenshot" style="width:100%;border-radius:10px;">
+          <div class="meta">
+            <div>
+              <div style="font-weight:700">Skills</div>
+              <div class="muted" style="font-size:13px">Unity, C#, Netcode, Gameplay, Tools</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:700">Availability</div>
+              <div class="muted" style="font-size:13px">Open to roles & freelance</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div>
+            <h3>Selected Projects</h3>
+            <p class="muted">A selection of solo projects, click images to open live builds or repositories.</p>
+          </div>
+        </div>
+
+        <div class="cards" style="margin-top:18px">
+          <article class="card" data-delay="0">
+            <img src="assets/NeighborhoodShot.png" alt="TumbleTrash screenshot">
+            <h4>TumbleTrash!</h4>
+            <p class="muted">Arcade trash‑cleaning game prototype. Built with Unity.</p>
+            <div class="links">
+              <a href="https://matthew-gigante.itch.io/tumbletrash" target="_blank">Play (itch.io)</a>
+            </div>
+          </article>
+
+          <article class="card" data-delay="80">
+            <img src="assets/Isometric.png" alt="Isometric RPG screenshot">
+            <h4>Isometric RPG Prototype</h4>
+            <p class="muted">Isometric exploration prototype. Focus on camera, pathing, and interaction systems.</p>
+            <div class="links">
+              <a href="https://github.com/matthew0420/Isometric_RPG_git" target="_blank">Repo</a>
+            </div>
+          </article>
+
+          <article class="card" data-delay="160">
+            <img src="assets/RailShooter.gif" alt="Off The Rails">
+            <h4>Off The Rails!</h4>
+            <p class="muted">A rail-shooter inspired VR prototype.</p>
+            <div class="links">
+              <a href="https://matthew-gigante.itch.io/off-the-rails" target="_blank">itch.io</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="resume">
+        <h3>Resume</h3>
+        <div style="margin-top:14px" class="resume-card">
+          <div style="flex:1">
+            <p class="muted">A live link to view my resume.</p>
+            <div style="display:flex;gap:10px;margin-top:10px">
+              <a class="cta"
+                href="https://docs.google.com/document/d/1JopYNzuPbsYivUMpyH8ak09YAA-wJztBLEj8Lr-xVoE/edit?tab=t.0"
+                target="_blank">Open Resume</a>
+            </div>
+          </div>
+          <div style="width:300px;text-align:center;color:var(--muted)">
+            <div style="font-weight:700">Skills</div>
+            <div style="font-size:13px;margin-top:6px">Github, Unity3D/2D, C#, Unreal Engine, C++, Python, Minimum Viable Product creation, Agile, Game Maker Studio, Games writing and development, HTML, JavaScript, Pixi.js, CSS, Node.js, Webpack, GitLab, SourceTree</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h3>Contact</h3>
+        <div style="margin-top:14px" class="contact-grid">
+          <div class="contact-card">
+            <p class="muted">Want to work together? I’m available for freelance and full‑time opportunities.</p>
+            <p style="margin-top:10px;font-weight:700">Email</p>
+            <a href="mailto:matthewgigante0420@gmail.com" style="color:var(--accent);text-decoration:none;word-break:break-all">matthewgigante0420@gmail.com</a>
+
+            <div style="margin-top:18px">
+              <p style="font-weight:700;margin:0">Location</p>
+              <p class="muted" style="margin:6px 0 0">Šibenik, Croatia</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <p style="font-weight:700;margin:0">Social</p>
+            <div style="display:flex;flex-direction: column;gap:10px;margin-top:10px">
+              <a href="https://github.com/matthew0420" target="_blank" style="text-decoration:none;color:var(--muted)">GitHub</a>
+              <a href="https://www.linkedin.com/in/matthew-gigante/" target="_blank" style="text-decoration:none;color:var(--muted)">LinkedIn</a>
+              <a href="https://matthew-gigante.itch.io/" target="_blank" style="text-decoration:none;color:var(--muted)">Itch.io</a>
+              <a href="https://bsky.app/profile/matthewgigante.bsky.social" target="_blank" style="text-decoration:none;color:var(--muted)">BlueSky</a>
+              <a href="https://x.com/matthew_gigante" target="_blank" style="text-decoration:none;color:var(--muted)">X/Twitter</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © <span id="year"></span> Matthew Gigante
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', ()=>{
+      if(mobileNav.style.display === 'none' || mobileNav.style.display === ''){
+        mobileNav.style.display = 'block';
+        mobileNav.innerHTML = `
+          <a href="#home" style="display:block;padding:8px 0;color:var(--muted);text-decoration:none">Home</a>
+          <a href="#projects" style="display:block;padding:8px 0;color:var(--muted);text-decoration:none">Projects</a>
+          <a href="#resume" style="display:block;padding:8px 0;color:var(--muted);text-decoration:none">Resume</a>
+          <a href="#contact" style="display:block;padding:8px 0;color:var(--muted);text-decoration:none">Contact</a>
+        `;
+      } else { mobileNav.style.display = 'none'; }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+          if(window.innerWidth < 851) mobileNav.style.display = 'none';
+        }
+      })
+    });
+
+    const cards = document.querySelectorAll('.card');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    },{threshold:0.1});
+    cards.forEach((c,i)=>{obs.observe(c)});
+
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='m'){
+        const el = document.getElementById('projects');
+        if(el) el.scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
+</body>
+</html>
