@@ -32,6 +32,12 @@
       overflow-x:hidden;
     }
 
+    /* Z-index fixes for proper stacking */
+    .wrap, header, main, section {
+      position: relative;
+      z-index: 10;
+    }
+
     .wrap{max-width:var(--max-width);margin:0 auto;padding:28px;position:relative;z-index:10}
 
     header {
@@ -44,6 +50,7 @@
       border-radius: 12px;
       border: 1px solid #111;
       background: #000;
+      z-index: 100;
     }
     .brand {
       display: flex;
@@ -110,46 +117,6 @@
       .contact-grid{grid-template-columns:1fr}
     }
 
-    /* Binary code columns */
-    .binary-column {
-      position: fixed;
-      top: 0;
-      width: 80px;
-      height: 100%;
-      color: #00ff66;
-      font-family: monospace;
-      font-size: 14px;
-      line-height: 16px;
-      white-space: pre;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-      background: linear-gradient(to bottom, transparent 0%, rgba(0,255,100,0.08) 100%);
-    }
-    .left-binary {
-      left: 0;
-      text-align: left;
-      padding-left: 6px;
-    }
-    .right-binary {
-      right: 0;
-      text-align: right;
-      padding-right: 6px;
-    }
-    @keyframes scroll-binary {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(100%); }
-    }
-    .binary-column::before {
-      content: attr(data-binary);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      animation: scroll-binary 15s linear infinite;
-      opacity: 0.4;
-    }
-
     /* Video section */
     .video-section {
       text-align:center;
@@ -167,13 +134,65 @@
       height: 340px;
       background: #000;
     }
+    
+    /* Canvas styling with proper z-index */
+    #binaryCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Behind everything */
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    
+    /* Placeholder styling for missing images */
+    .image-placeholder {
+      width: 100%;
+      height: 170px;
+      background: #111;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      border: 1px solid #222;
+      font-size: 14px;
+    }
+    
+    .video-placeholder {
+      width: 100%;
+      height: 340px;
+      background: #111;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      border: 1px solid #222;
+      font-size: 14px;
+    }
+    
+    .profile-placeholder {
+      width: 100%;
+      height: 300px;
+      background: #111;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      border: 1px solid #222;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
 
   <!-- Binary code on sides -->
-  <div class="binary-column left-binary"></div>
-  <div class="binary-column right-binary"></div>
+  <div class="binary-column left-binary" data-binary="01001000 01100101 01101100 01101100 01101111 00100000 01010111 01101111 01110010 01101100 01100100"></div>
+  <div class="binary-column right-binary" data-binary="01001101 01100001 01110100 01110100 01101000 01100101 01110111 00100000 01000111 01101001 01100111 01100001 01101110 01110100 01100101"></div>
 
   <div class="wrap">
     <header>
@@ -206,7 +225,11 @@
         </div>
 
         <aside class="profile-card">
-          <img src="assets/IMG_2024_JPG.jpg" alt="Matthew Gigante - Game Developer" style="width:100%;border-radius:10px;">
+          <!-- Original image name preserved -->
+          <img src="assets/IMG_2024_JPG.jpg" alt="Matthew Gigante - Game Developer" onerror="this.style.display='none'; document.getElementById('profile-placeholder').style.display='flex';" style="width:100%;border-radius:10px;">
+          <div id="profile-placeholder" class="profile-placeholder" style="display:none;">
+            Profile Image (assets/IMG_2024_JPG.jpg)
+          </div>
           <div class="meta">
             <div>
               <div style="font-weight:700">Skills</div>
@@ -220,20 +243,35 @@
         </aside>
       </section>
 
-      <!-- New Video Section -->
+      <!-- Video Section -->
       <section id="videos" class="video-section">
         <h3>Video Showcase</h3>
         <p class="muted">Short gameplay clips and technical demonstrations.</p>
         <div class="video-grid">
-          <video controls>
+          <!-- Original video names preserved -->
+          <video controls onerror="this.style.display='none'; document.getElementById('video1-placeholder').style.display='flex';">
             <source src="assets/videoplayback.mp4" type="video/mp4">
+            Your browser does not support the video tag.
           </video>
-          <video controls>
+          <div id="video1-placeholder" class="video-placeholder" style="display:none;">
+            Video 1 (assets/videoplayback.mp4)
+          </div>
+          
+          <video controls onerror="this.style.display='none'; document.getElementById('video2-placeholder').style.display='flex';">
             <source src="assets/videoplayback2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
           </video>
-          <video controls>
+          <div id="video2-placeholder" class="video-placeholder" style="display:none;">
+            Video 2 (assets/videoplayback2.mp4)
+          </div>
+          
+          <video controls onerror="this.style.display='none'; document.getElementById('video3-placeholder').style.display='flex';">
             <source src="assets/videoplayback3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
           </video>
+          <div id="video3-placeholder" class="video-placeholder" style="display:none;">
+            Video 3 (assets/videoplayback3.mp4)
+          </div>
         </div>
       </section>
 
@@ -241,7 +279,11 @@
         <h3>Selected Projects</h3>
         <div class="cards" style="margin-top:18px">
           <article class="card">
-            <img src="assets/NeighborhoodShot.png" alt="TumbleTrash game screenshot">
+            <!-- Original image names preserved -->
+            <img src="assets/NeighborhoodShot.png" alt="TumbleTrash game screenshot" onerror="this.style.display='none'; document.getElementById('img1-placeholder').style.display='flex';">
+            <div id="img1-placeholder" class="image-placeholder" style="display:none;">
+              TumbleTrash Screenshot (assets/NeighborhoodShot.png)
+            </div>
             <h4>TumbleTrash!</h4>
             <p class="muted">Arcade trash-cleaning game prototype. Built with Unity.</p>
             <div class="links">
@@ -250,7 +292,10 @@
           </article>
 
           <article class="card">
-            <img src="assets/Isometric.png" alt="Isometric RPG prototype screenshot">
+            <img src="assets/Isometric.png" alt="Isometric RPG prototype screenshot" onerror="this.style.display='none'; document.getElementById('img2-placeholder').style.display='flex';">
+            <div id="img2-placeholder" class="image-placeholder" style="display:none;">
+              Isometric RPG Screenshot (assets/Isometric.png)
+            </div>
             <h4>Isometric RPG Prototype</h4>
             <p class="muted">Exploration prototype focusing on camera and pathing systems.</p>
             <div class="links">
@@ -259,7 +304,10 @@
           </article>
 
           <article class="card">
-            <img src="assets/RailShooter.gif" alt="Off The Rails VR game screenshot">
+            <img src="assets/RailShooter.gif" alt="Off The Rails VR game screenshot" onerror="this.style.display='none'; document.getElementById('img3-placeholder').style.display='flex';">
+            <div id="img3-placeholder" class="image-placeholder" style="display:none;">
+              Off The Rails Screenshot (assets/RailShooter.gif)
+            </div>
             <h4>Off The Rails!</h4>
             <p class="muted">A rail-shooter inspired VR prototype.</p>
             <div class="links">
@@ -314,18 +362,12 @@
   
 <canvas id="binaryCanvas"></canvas>
 <script>
+  // Set current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  // Binary canvas background
   const canvas = document.getElementById('binaryCanvas');
   const ctx = canvas.getContext('2d');
-
-  // Make canvas full-screen and behind all content
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.style.zIndex = '-1';  // behind content
-  canvas.style.pointerEvents = 'none';
-  canvas.style.background = 'transparent';
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -336,26 +378,26 @@
 
   // Binary stream particles
   const binaries = [];
-  const numParticles = 60; // more = denser effect
+  const numParticles = 40; // Reduced for better performance
 
-  const binaryForHelloWorld = "01001000 01100101 01101100 01101100 01101111 01010111 01101111 01110010 01101100 01100100".split('');
+  const binaryForHelloWorld = "01001000 01100101 01101100 01101100 01101111 01010111 01101111 01110010 01101100 01100100".split(' ').join('').split('');
 
   for (let i = 0; i < numParticles; i++) {
     binaries.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      speed: (Math.random() * 1.5 + 0.5) * (Math.random() < 0.5 ? 1 : -1), // left or right
+      speed: (Math.random() * 1.5 + 0.5) * (Math.random() < 0.5 ? 1 : -1),
       text: binaryForHelloWorld[Math.floor(Math.random() * binaryForHelloWorld.length)],
-      size: Math.random() * 16 + 10,
-      opacity: Math.random() * 0.6 + 0.2
+      size: Math.random() * 16 + 10
     });
   }
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = 'bold 18px monospace';
+    ctx.font = 'bold 16px monospace';
+    ctx.fillStyle = 'rgba(0, 255, 100, 0.6)'; // Lower opacity
     binaries.forEach(b => {
-      ctx.fillStyle = `rgba(0, 255, 100, ${b.opacity})`;
+      ctx.globalAlpha = b.opacity;
       ctx.fillText(b.text, b.x, b.y);
       b.x += b.speed;
 
@@ -364,12 +406,45 @@
         b.speed *= -1;
       }
       // Slight random movement
-      b.y += Math.sin(Date.now() / 500 + b.x) * 0.1;
+      b.y += Math.sin(Date.now() / 1000 + b.x) * 0.05; // Slower movement
     });
     requestAnimationFrame(draw);
   }
 
   draw();
+  
+  // Card animation on scroll
+  const cards = document.querySelectorAll('.card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  cards.forEach(card => {
+    observer.observe(card);
+  });
+  
+  // Mobile menu toggle
+  document.getElementById('menuBtn').addEventListener('click', function() {
+    const nav = document.querySelector('nav');
+    if (nav.style.display === 'flex') {
+      nav.style.display = 'none';
+    } else {
+      nav.style.display = 'flex';
+      nav.style.flexDirection = 'column';
+      nav.style.position = 'absolute';
+      nav.style.top = '100%';
+      nav.style.right = '0';
+      nav.style.background = '#000';
+      nav.style.border = '1px solid #111';
+      nav.style.borderRadius = '12px';
+      nav.style.padding = '12px';
+      nav.style.zIndex = '1000';
+    }
+  });
 </script>
 </body>
 </html>
