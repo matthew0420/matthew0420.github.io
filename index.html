@@ -39,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%; /* Fixed: changed from 20% to full width */
+      width: 100%;
       padding: 5px;
       border-radius: 12px;
       border: 1px solid #111;
@@ -66,7 +66,7 @@
     }
     nav{display:flex;gap:18px;align-items:center}
     nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
-    nav a:hover, nav a:focus{color:var(--accent);background:#111} /* Added focus state */
+    nav a:hover, nav a:focus{color:var(--accent);background:#111}
     .cta{background:#000; color:var(--accent); padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700}
 
     .hamburger{display:none;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer}
@@ -109,6 +109,34 @@
     .contact-card{padding:18px;border-radius:12px}
 
     footer{padding:40px 0;color:var(--muted);text-align:center}
+
+    /* Video Showcase */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .video-grid video {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid #111;
+      background: #000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-grid video:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+
+    @media (max-width: 900px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     /* Responsive */
     @media (max-width:1100px){
@@ -168,14 +196,6 @@
         </div>
       </div>
 
-      <!-- Fixed: Added navigation links -->
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
       <button class="hamburger" aria-label="Open menu" id="menuBtn">☰</button>
     </header>
 
@@ -186,11 +206,10 @@
         <div class="intro">
           <h2>This is <span class="accent-underline">Matthew Gigante</span></h2>
           <h1>Game Developer focused on systems, networking, and gameplay feel.</h1>
-          <p class="lead">I build games, tools and prototypes with an emphasis on clean code, robust systems, and fun player interactions. I work mainly with Unity, C#, and real‑time networking. Below are some highlights from my recent work.</p>
+          <p class="lead">I build games, tools and prototypes with an emphasis on clean code, robust systems, and fun player interactions. I work mainly with Unity, C#, and real-time networking. Below are some highlights from my recent work.</p>
         </div>
 
         <aside class="profile-card">
-          <!-- Fixed: Added alt text for accessibility -->
           <img src="assets/IMG_2024_JPG.jpg" alt="Matthew Gigante - Game Developer" style="width:100%;border-radius:10px;">
           <div class="meta">
             <div>
@@ -205,6 +224,29 @@
         </aside>
       </section>
 
+      <!-- 🎥 New Video Showcase Section -->
+      <section id="videos">
+        <h3>Video Showcase</h3>
+        <p class="muted">Short clips highlighting gameplay, tools, and work from previous companies.</p>
+
+        <div class="video-grid">
+          <video controls autoplay loop muted playsinline>
+            <source src="assets/videoplayback.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <video controls autoplay loop muted playsinline>
+            <source src="assets/videoplayback2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <video controls autoplay loop muted playsinline>
+            <source src="assets/videoplayback3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
       <section id="projects">
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
           <div>
@@ -215,17 +257,15 @@
 
         <div class="cards" style="margin-top:18px">
           <article class="card" data-delay="0">
-            <!-- Fixed: Added alt text for accessibility -->
             <img src="assets/NeighborhoodShot.png" alt="TumbleTrash game screenshot showing neighborhood environment">
             <h4>TumbleTrash!</h4>
-            <p class="muted">Arcade trash‑cleaning game prototype. Built with Unity.</p>
+            <p class="muted">Arcade trash-cleaning game prototype. Built with Unity.</p>
             <div class="links">
               <a href="https://matthew-gigante.itch.io/tumbletrash" target="_blank">Play (itch.io)</a>
             </div>
           </article>
 
           <article class="card" data-delay="80">
-            <!-- Fixed: Added alt text for accessibility -->
             <img src="assets/Isometric.png" alt="Isometric RPG prototype screenshot">
             <h4>Isometric RPG Prototype</h4>
             <p class="muted">Isometric exploration prototype. Focus on camera, pathing, and interaction systems.</p>
@@ -235,7 +275,6 @@
           </article>
 
           <article class="card" data-delay="160">
-            <!-- Fixed: Added alt text for accessibility -->
             <img src="assets/RailShooter.gif" alt="Off The Rails VR game screenshot">
             <h4>Off The Rails!</h4>
             <p class="muted">A rail-shooter inspired VR prototype.</p>
@@ -268,7 +307,7 @@
         <h3>Contact</h3>
         <div style="margin-top:14px" class="contact-grid">
           <div class="contact-card">
-            <p class="muted">Want to work together? I'm available for freelance and full‑time opportunities.</p>
+            <p class="muted">Want to work together? I'm available for freelance and full-time opportunities.</p>
             <p style="margin-top:10px;font-weight:700">Email</p>
             <a href="mailto:matthewgigante0420@gmail.com" style="color:var(--accent);text-decoration:none;word-break:break-all">matthewgigante0420@gmail.com</a>
 
@@ -329,27 +368,17 @@
       })
     });
 
-    // Fixed: Added error handling for cards
     const cards = document.querySelectorAll('.card');
     if (cards.length > 0) {
-      const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ 
-            e.target.classList.add('visible'); 
-            obs.unobserve(e.target); 
+      const observer = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
           }
         });
-      },{threshold:0.1});
-      cards.forEach((c,i)=>{obs.observe(c)});
+      }, {threshold:0.2});
+      cards.forEach(card=>observer.observe(card));
     }
-
-    // Optional: Remove or document the 'M' key feature
-    window.addEventListener('keydown', (e)=>{
-      if(e.key.toLowerCase()==='m'){
-        const el = document.getElementById('projects');
-        if(el) el.scrollIntoView({behavior:'smooth'});
-      }
-    });
   </script>
 </body>
 </html>
