@@ -186,6 +186,16 @@
       border: 1px solid #222;
       font-size: 14px;
     }
+
+    .glow-green {
+      color: var(--accent);
+      text-shadow:
+        0 0 5px #00ff6650,
+        0 0 10px #00ff6650,
+        0 0 20px #00ff6650,
+        0 0 40px #00ff6650;
+    }
+
   </style>
 </head>
 <body>
@@ -199,7 +209,7 @@
       <div class="brand">
         <div class="logo">MG</div>
         <div>
-          <h1 style="font-size:20px;margin:0">Matthew Gigante</h1>
+          <h1 class="glow-green" style="font-size:20px;margin:0">Matthew Gigante</h1>
           <div style="font-size:14px;line-height:1.2;">Gameplay Programmer<br>Game Developer</div>
         </div>
       </div>
@@ -219,7 +229,7 @@
 
       <section id="home" class="hero">
         <div class="intro">
-          <h2>This is <span class="accent-underline">Matthew Gigante</span></h2>
+          <h2 class="glow-green">This is <span class="accent-underline">Matthew Gigante</span></h2>
           <h1>Game Developer focused on systems, networking, and gameplay feel.</h1>
           <p class="lead">I build games, tools and prototypes with an emphasis on clean code, robust systems, and fun player interactions.</p>
         </div>
@@ -245,7 +255,7 @@
 
       <!-- Video Section -->
       <section id="videos" class="video-section">
-        <h3>Video Showcase</h3>
+        <h3 class="glow-green">Video Showcase</h3>
         <p class="muted">Short gameplay clips and technical demonstrations.</p>
         <div class="video-grid">
           <!-- Original video names preserved -->
@@ -276,7 +286,7 @@
       </section>
 
       <section id="projects">
-        <h3>Selected Projects</h3>
+        <h3 class="glow-green">Selected Projects</h3>
         <div class="cards" style="margin-top:18px">
           <article class="card">
             <!-- Original image names preserved -->
@@ -318,7 +328,7 @@
       </section>
 
       <section id="resume">
-        <h3>Resume</h3>
+        <h3 class="glow-green">Resume</h3>
         <div class="resume-card">
           <div style="flex:1">
             <p class="muted">A live link to view my resume.</p>
@@ -334,7 +344,7 @@
       </section>
 
       <section id="contact">
-        <h3>Contact</h3>
+        <h3 class="glow-green">Contact</h3>
         <div class="contact-grid">
           <div class="contact-card">
             <p class="muted">Want to work together? I'm available for freelance and full-time opportunities.</p>
@@ -395,7 +405,11 @@
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.font = 'bold 16px monospace';
-    ctx.fillStyle = 'rgba(0, 255, 100, 0.6)'; // Lower opacity
+    ctx.fillStyle = '#00ff66';      // Solid green for text
+    ctx.shadowColor = '#00ff66';    // Glow color
+    ctx.shadowBlur = 8;             // Glow radius
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     binaries.forEach(b => {
       ctx.globalAlpha = b.opacity;
       ctx.fillText(b.text, b.x, b.y);
